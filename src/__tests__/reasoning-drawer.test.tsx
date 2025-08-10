@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { ReasoningDrawer } from "@/components/reasoning/ReasoningDrawer";
 
-const decision = {
+import type { RoutingDecision } from "@/lib/types";
+
+const decision: RoutingDecision = {
   rationale: "Because keywords matched",
   agents: [
     { id: "sight", name: "Sight", score: 0.8, reasons: ["literature"], riskTier: "low" },

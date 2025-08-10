@@ -1,4 +1,4 @@
-import { AGENT_SPECS } from "@/lib/agents";
+import { AGENT_SPECS } from "@/lib/agents/index";
 import { z } from "zod";
 
 describe("agent specs registry", () => {
