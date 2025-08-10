@@ -3,6 +3,10 @@ import { useMemo, useRef } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { cn } from "@/lib/utils";
 import { AgentChip } from "@/components/agents/AgentChip";
+import { AssistantHeader } from "@/components/chat/AssistantHeader";
+import { SuggestionList } from "@/components/chat/SuggestionList";
+import { MessageActions } from "@/components/chat/MessageActions";
+import { emitAudit } from "@/lib/audit";
 import type { ChatMessage as ChatMessageType } from "@/lib/types";
 
 export type ChatMessage = ChatMessageType;
@@ -31,26 +35,30 @@ export function MessageList({ messages, isLoading, className }: MessageListProps
     const when = msg.createdAt ? new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
     return (
       <div className="px-1 py-2" key={msg.id} role="listitem">
-        <div
-          className={cn(
-            "max-w-prose rounded-lg px-3 py-2 text-sm shadow-sm",
-            isAssistant ? "bg-secondary text-secondary-foreground" : "ml-auto bg-primary text-primary-foreground",
-          )}
-        >
-          {isAssistant && msg.agentName ? (
-            <div className="mb-1 flex items-center gap-2 text-xs text-muted-foreground">
-              <AgentChip name={msg.agentName} riskTier={msg.agentRisk} />
-              {when ? <span aria-hidden>·</span> : null}
-              {when ? (
-                <time dateTime={new Date(msg.createdAt as string | Date).toString()}>{when}</time>
-              ) : null}
-            </div>
-          ) : when ? (
+        <div className="max-w-prose rounded-lg px-3 py-2 text-sm shadow-sm bg-card">
+          {isAssistant ? (
+            <AssistantHeader
+              agentId={(msg as any)?.routing?.agents?.[0]?.id}
+              agentName={msg.agentName}
+              decision={(msg as any)?.routing}
+              reasonSeconds={Math.max(1, Math.round(((msg.meta?.decisionDurationMs ?? 0) / 1000) || 0))}
+              onOpenReasoning={() => emitAudit({ type: "REASONING_VIEWED", decision: (msg as any)?.routing })}
+            />
+          ) : (
             <div className="mb-1 text-right text-[11px] opacity-70">
               <time dateTime={new Date(msg.createdAt as string | Date).toString()}>{when}</time>
             </div>
-          ) : null}
+          )}
           <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+          {isAssistant ? (
+            <>
+              <SuggestionList
+                suggestions={["[suggestion 1]", "[suggestion 2]", "[suggestion 3]", "[suggestion 4]"]}
+                onPick={(t) => navigator.clipboard.writeText(t).catch(() => {})}
+              />
+              <MessageActions messageId={msg.id} text={msg.content} />
+            </>
+          ) : null}
         </div>
       </div>
     );

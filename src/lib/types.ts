@@ -53,6 +53,10 @@ export type ChatMessage = {
   agentName?: string;
   agentRisk?: RiskTier;
   routing?: RoutingDecision;
+  meta?: {
+    decisionDurationMs?: number;
+    totalDurationMs?: number;
+  };
 };
 
 

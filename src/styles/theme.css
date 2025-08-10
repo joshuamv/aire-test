@@ -40,6 +40,47 @@
   --agent-oncology: 330 81% 43%; /* pink */
   --agent-radiology: 191 94% 37%; /* cyan */
   --agent-fallback: 215 20% 45%; /* gray-blue */
+
+  /* Chat background gradient tokens (light) */
+  --bg-neutral-from: 210 40% 98%;
+  --bg-neutral-to: 210 60% 92%;
+  --bg-neutral-dot: 215 16% 85%;
+
+  --bg-sight-from: var(--agent-sight);
+  --bg-sight-to: 221 83% 96%;
+  --bg-sight-dot: 221 40% 86%;
+
+  --bg-population-from: var(--agent-population_builder);
+  --bg-population-to: 142 72% 96%;
+  --bg-population-dot: 142 35% 82%;
+
+  --bg-genomics-from: var(--agent-genomics);
+  --bg-genomics-to: 262 83% 97%;
+  --bg-genomics-dot: 262 35% 86%;
+
+  --bg-summarizer-from: var(--agent-summarizer);
+  --bg-summarizer-to: 210 22% 96%;
+  --bg-summarizer-dot: 210 12% 85%;
+
+  --bg-meds-from: var(--agent-meds);
+  --bg-meds-to: 22 90% 96%;
+  --bg-meds-dot: 22 40% 86%;
+
+  --bg-endocrinology-from: var(--agent-endocrinology);
+  --bg-endocrinology-to: 28 92% 96%;
+  --bg-endocrinology-dot: 28 40% 86%;
+
+  --bg-cardiology-from: var(--agent-cardiology);
+  --bg-cardiology-to: 0 72% 97%;
+  --bg-cardiology-dot: 0 35% 86%;
+
+  --bg-oncology-from: var(--agent-oncology);
+  --bg-oncology-to: 330 81% 97%;
+  --bg-oncology-dot: 330 35% 86%;
+
+  --bg-radiology-from: var(--agent-radiology);
+  --bg-radiology-to: 191 94% 97%;
+  --bg-radiology-dot: 191 35% 86%;
 }
 
 .dark {
@@ -83,5 +124,48 @@
   --agent-radiology: 191 94% 50%;
   --agent-fallback: 215 20% 65%;
 }
+
+/* Chat background utility */
+.chat-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease, background 250ms ease;
+  background-repeat: no-repeat;
+}
+
+/* The base gradient uses CSS variables --bg-from / --bg-to / --bg-dot set by agent classes */
+.chat-bg::before,
+.chat-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+}
+
+.chat-bg::before {
+  /* big soft radial gradient from bottom center */
+  background-image: radial-gradient(1200px 600px at 50% 100%, hsl(var(--bg-to) / 0.25) 0%, transparent 60%),
+    radial-gradient(900px 450px at 50% 100%, hsl(var(--bg-from) / 0.18) 0%, transparent 70%);
+}
+
+.chat-bg::after {
+  /* subtle dotted overlay */
+  background-image: radial-gradient(hsl(var(--bg-dot) / 0.25) 1px, transparent 1px);
+  background-size: 12px 12px;
+  mask-image: linear-gradient(to top, transparent 0%, black 40%, black 100%);
+}
+
+/* Agent-specific variable setters */
+.chat-gradient-neutral { --bg-from: var(--bg-neutral-from); --bg-to: var(--bg-neutral-to); --bg-dot: var(--bg-neutral-dot); }
+.chat-gradient-sight { --bg-from: var(--bg-sight-from); --bg-to: var(--bg-sight-to); --bg-dot: var(--bg-sight-dot); }
+.chat-gradient-population_builder { --bg-from: var(--bg-population-from); --bg-to: var(--bg-population-to); --bg-dot: var(--bg-population-dot); }
+.chat-gradient-genomics { --bg-from: var(--bg-genomics-from); --bg-to: var(--bg-genomics-to); --bg-dot: var(--bg-genomics-dot); }
+.chat-gradient-summarizer { --bg-from: var(--bg-summarizer-from); --bg-to: var(--bg-summarizer-to); --bg-dot: var(--bg-summarizer-dot); }
+.chat-gradient-meds { --bg-from: var(--bg-meds-from); --bg-to: var(--bg-meds-to); --bg-dot: var(--bg-meds-dot); }
+.chat-gradient-endocrinology { --bg-from: var(--bg-endocrinology-from); --bg-to: var(--bg-endocrinology-to); --bg-dot: var(--bg-endocrinology-dot); }
+.chat-gradient-cardiology { --bg-from: var(--bg-cardiology-from); --bg-to: var(--bg-cardiology-to); --bg-dot: var(--bg-cardiology-dot); }
+.chat-gradient-oncology { --bg-from: var(--bg-oncology-from); --bg-to: var(--bg-oncology-to); --bg-dot: var(--bg-oncology-dot); }
+.chat-gradient-radiology { --bg-from: var(--bg-radiology-from); --bg-to: var(--bg-radiology-to); --bg-dot: var(--bg-radiology-dot); }
 
 
