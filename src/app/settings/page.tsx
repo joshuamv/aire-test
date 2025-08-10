@@ -4,6 +4,8 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PageShell from "@/components/common/PageShell";
 import { useRoutingStore } from "@/lib/stores";
+import * as ReactHookForm from "react-hook-form";
+import { Input } from "@/components/ui/input";
 
 export default function SettingsPage() {
   const always = useRoutingStore((s) => s.alwaysShowReasoning);
@@ -37,6 +39,44 @@ export default function SettingsPage() {
               <p className="text-sm text-muted-foreground">Automatically open the routing drawer after assistant replies.</p>
             </div>
             <Switch checked={always} onCheckedChange={setAlways} aria-label="Always show reasoning" />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>LLM (dev)</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-4 sm:max-w-lg" data-testid="settings-llm">
+            <label className="grid gap-1 text-sm">
+              <span className="text-muted-foreground">Provider</span>
+              <Input
+                defaultValue={typeof window !== "undefined" ? localStorage.getItem("aire:llm:provider") ?? "mock" : "mock"}
+                onChange={(e) => {
+                  if (typeof window !== "undefined") localStorage.setItem("aire:llm:provider", e.target.value);
+                }}
+                placeholder="mock | openai"
+              />
+            </label>
+            <label className="grid gap-1 text-sm">
+              <span className="text-muted-foreground">Model</span>
+              <Input
+                defaultValue={typeof window !== "undefined" ? localStorage.getItem("aire:llm:model") ?? "gpt-4o-mini" : "gpt-4o-mini"}
+                onChange={(e) => {
+                  if (typeof window !== "undefined") localStorage.setItem("aire:llm:model", e.target.value);
+                }}
+                placeholder="model name"
+              />
+            </label>
+            <label className="grid gap-1 text-sm">
+              <span className="text-muted-foreground">Endpoint (optional)</span>
+              <Input
+                defaultValue={typeof window !== "undefined" ? localStorage.getItem("aire:llm:endpoint") ?? "" : ""}
+                onChange={(e) => {
+                  if (typeof window !== "undefined") localStorage.setItem("aire:llm:endpoint", e.target.value);
+                }}
+                placeholder="https://..."
+              />
+            </label>
           </CardContent>
         </Card>
       </div>
