@@ -4,8 +4,8 @@ import { ReasoningDrawer } from "@/components/reasoning/ReasoningDrawer";
 const decision = {
   rationale: "Because keywords matched",
   agents: [
-    { name: "Sight", score: 0.8, reasons: ["literature"], riskTier: "low" },
-    { name: "Population Builder", score: 0.6, reasons: ["population"], riskTier: "medium" },
+    { id: "sight", name: "Sight", score: 0.8, reasons: ["literature"], riskTier: "low" },
+    { id: "population_builder", name: "Population Builder", score: 0.6, reasons: ["population"], riskTier: "medium" },
   ],
   features: { keywords: ["literature", "population"], entities: ["metformin"], flags: [] },
 };

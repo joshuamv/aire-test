@@ -23,4 +23,6 @@ export const AGENT_SPECS: Record<string, AgentSpec> = Object.fromEntries(
   ].map((s) => [s.id, s]),
 );
 
+export type { AgentSpec } from "@/lib/agents/spec";
+
 
