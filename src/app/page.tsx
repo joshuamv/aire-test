@@ -1,5 +1,9 @@
 import { ChatPanel } from "@/components/chat/ChatPanel";
 
 export default function Home() {
-  return <ChatPanel initialMessages={[]} hasPHIConsent={true} />;
+  return (
+    <div className="flex w-full justify-center">
+      <ChatPanel initialMessages={[]} hasPHIConsent={true} />
+    </div>
+  );
 }

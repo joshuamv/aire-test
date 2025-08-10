@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(geistSans.variable, geistMono.variable, "min-h-screen bg-background font-sans antialiased")}
         >
-        <header role="banner" className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header role="banner" className="sticky top-0 z-40 border-b bg-background">
           <PageShell>
             <div className="flex h-14 items-center justify-between">
               <Link href="/" className="font-semibold" aria-label="Briya AIRE home">
@@ -47,8 +47,8 @@ export default function RootLayout({
             </div>
           </PageShell>
         </header>
-        <main id="main" role="main">
-          <PageShell className="py-8">{children}</PageShell>
+        <main id="main" role="main" className="py-8">
+          <PageShell>{children}</PageShell>
         </main>
         <footer role="contentinfo" className="border-t py-6 text-center text-xs text-muted-foreground">
           <PageShell>

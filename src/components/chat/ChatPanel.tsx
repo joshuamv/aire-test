@@ -64,7 +64,7 @@ export function ChatPanel({ initialMessages = [], hasPHIConsent = true }: ChatPa
   const hasAssistant = latestAssistantIndex !== -1;
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    <div className="flex w-full max-w-3xl flex-col gap-4">
       {!hasPHIConsent && (
         <div role="region" aria-label="PHI notice" className="rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
           Sharing PHI requires consent. Please review settings.
