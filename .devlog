@@ -1,0 +1,23 @@
+
+> aire-test@0.1.0 dev /Users/joshua/Projects/aire-test
+> next dev --port 3001 --hostname 127.0.0.1
+
+   ▲ Next.js 15.4.6
+   - Local:        http://127.0.0.1:3001
+   - Network:      http://127.0.0.1:3001
+
+ ✓ Starting...
+ ✓ Ready in 1527ms
+ ○ Compiling / ...
+
+warn - The class `data-[state=closed]:slide-out-to-top-[48%]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `data-&lsqb;state=closed&rsqb;:slide-out-to-top-[48%]` to silence this warning.
+
+warn - The class `data-[state=open]:slide-in-from-top-[48%]` is ambiguous and matches multiple utilities.
+warn - If this is content and not a class, replace it with `data-&lsqb;state=open&rsqb;:slide-in-from-top-[48%]` to silence this warning.
+ ✓ Compiled / in 3.9s (821 modules)
+ GET / 200 in 4254ms
+ ○ Compiling /api/chat ...
+ ✓ Compiled /api/chat in 1148ms (876 modules)
+ POST /api/chat 200 in 885ms
+[?25h
